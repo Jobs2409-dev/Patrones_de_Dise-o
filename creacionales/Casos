@@ -1,0 +1,72 @@
+Caso A -> Protoype: Crea un clon por medio de una interfaz que obliga a las clase que hereden de la clase abstracta implementar el método.
+
+
+Estás programando un simulador militar. Al iniciar la partida se carga en memoria un combatiente estándar: se leyeron 
+sus archivos pesados del disco, se procesaron sus texturas y se calculó su árbol de habilidades. Durante el combate 
+necesitás que aparezcan 40 combatientes iguales en distintas coordenadas sin congelar la pantalla varios segundos por cada 
+uno que entra al mapa.
+    Pregunta 1: ¿Te conviene mandar a fabricar cada combatiente arrancando el proceso desde cero, o te conviene agarrar el 
+    que ya tenés vivo en la RAM y sacarle un duplicado rápido?
+
+    Pregunta 2: Si modificás la coordenada del combatiente nuevo para ubicarlo en el mapa, ¿el combatiente molde original 
+    tiene que enterarse o debe seguir intacto?
+
+
+Caso B -> Factory Method: Hay una clase centrar que delaga las reglas de negocios, pero sin saber casos concretos lo que obliga 
+          a las subclases a instanciar objetos concretos decidiendo el resultado (como si es por billetera virtual o red bancaria)
+
+
+Tenés un sistema de cobros. Hay una clase central que contiene todas las reglas de negocio fijas: calcula comisiones, aplica 
+impuestos y emite la factura electrónica. Pero a la hora de procesar el pago en sí, la clase central no sabe cómo se 
+transfiere el dinero; delega esa tarea específica en una función para que las clases hijas resuelvan si se conectan a una red 
+bancaria o a una billetera virtual.
+
+    Pregunta 1: ¿El sistema necesita fabricar un grupo entero de cosas combinadas, o la clase central solo necesita obtener 
+    una única herramienta de cobro para completar su tarea?
+    
+
+    Pregunta 2: ¿Quién toma la decisión final de qué herramienta concreta usar: la clase central mediante un if/else, o una 
+    clase hija especializada que sobreescribe esa decisión?
+     La clase hije que sobreescirbe la desicion, ya que la clase central solo proporciona el método abtracto (Factory Method).
+
+
+Caso C -> Builder Patterns: Es un proceso paso a paso
+
+Estás desarrollando un generador de contratos legales en PDF. Un cliente puede necesitar un contrato básico de 2 cláusulas; 
+otro cliente necesita agregar cláusula de confidencialidad, anexo impositivo, garantías comerciales y firmas digitales. Todo 
+se va definiendo según lo que tilda el usuario en una pantalla antes de presionar "Descargar".
+
+    Pregunta 1: Si intentaras crear el contrato con Contrato(...), ¿podrías pasarle todos los datos juntos de un solo golpe, 
+    o la información va apareciendo de a puchos a medida que el usuario interactúa?
+
+    Pregunta 2: ¿Te conviene obligar al constructor a recibir 10 parámetros donde la mitad van a terminar vacíos 
+    (None, False), o te conviene ir agregando cada sección por separado antes de pedir el resultado final?
+
+
+Caso D
+
+Tenés una aplicación que monitorea el uso de memoria y procesador en un servidor. Múltiples módulos independientes (el 
+recolector de métricas, el detector de intrusos y el panel web) necesitan mandar mensajes a un archivo de texto en el disco 
+(auditoria.log). Si cada módulo intentara manejar su propio canal hacia ese archivo, podrían pisarse las escrituras o 
+bloquearse mutuamente.
+
+    Pregunta 1: En este sistema, ¿tendría sentido que convivan 3 o 4 gestores distintos disputándose el mismo archivo, o 
+    todo el programa debería consultar al mismo y único encargado en memoria?
+
+    Pregunta 2: Si un módulo le cambia una configuración a ese gestor (por ejemplo, cambiar el nivel a "solo errores 
+    graves"), ¿los demás módulos deberían ver ese cambio inmediatamente o deberían tener configuraciones desconectadas?
+
+
+Caso E
+
+Estás desarrollando un videojuego que tiene 2 estilos visuales seleccionables: "Medieval" y "Futurista". En la pantalla tenés 
+que mostrar simultáneamente: el marco de la vida, el cursor del mouse y la tipografía de los textos. Si el jugador elige 
+"Medieval", los 3 elementos deben tener aspecto de madera y pergamino; si elige "Futurista", los 3 deben ser de neón y metal. 
+No podés permitir que aparezca un cursor de nave espacial con un marco de madera vieja.
+
+    Pregunta 1: ¿Acá estás fabricando un solo objeto suelto, o estás obligado a fabricar un combo de cosas distintas que 
+    deben combinar obligatoriamente entre sí?
+
+    Pregunta 2: Si el día de mañana agregás el estilo "Cyberpunk", ¿te conviene cambiar el código de cada elemento por 
+    separado, o tener una fábrica completa que te entregue todo el paquete temático coherente?
+
